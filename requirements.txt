@@ -20,6 +20,7 @@ lru-dict==1.1.7
 multiaddr==0.0.9
 netaddr==0.8.0
 parsimonious==0.8.1
+progress==1.5
 protobuf==3.15.8
 pycryptodome==3.10.1
 pyrsistent==0.17.3

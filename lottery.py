@@ -8,6 +8,14 @@
 import re
 import random
 from web3 import Web3
+from progress.spinner import Spinner
+import time
+
+# constants for output coloring
+LGREEN = '\033[92m'
+GREEN = '\033[32m'
+BOLD = '\033[1m'
+ENDC = '\033[0m'
 
 
 ACCOUNTS_FILE = "accounts.txt"
@@ -16,7 +24,7 @@ ACCOUNTS_FILE = "accounts.txt"
 WEB3_ENDPOINT = "https://mainnet.infura.io/v3/"
 
 BLOCK_HEIGHT = 12362727
-CONFIRMATIONS = 6
+CONFIRMATIONS = 3
 
 
 def get_winner_by_block_hash(candidates, block_hash):
@@ -24,15 +32,16 @@ def get_winner_by_block_hash(candidates, block_hash):
     return random.choice(candidates)
 
 
-print(f"Load accounts from {ACCOUNTS_FILE}...", end="")
+print("")
+print(f"Load accounts from {ACCOUNTS_FILE}... ", end="")
 
 with open(ACCOUNTS_FILE) as f:
     accounts = f.readlines()
     accounts = [x.strip() for x in accounts]
 
-print("DONE")
+print(f"{GREEN}DONE{ENDC}")
 
-print("Sanity checks...", end="")
+print("Sanity checks... ", end="")
 for line in accounts:
     if line != line.strip():
         raise Exception(f"line {line} contains unneccessary spaces?")
@@ -44,22 +53,48 @@ for line in accounts:
 if len(accounts) != len(set(accounts)):
     raise Exception("Accounts contain duplicates?")
 
-print("DONE")
-print(f"Total accounts loaded: {len(accounts)}")
+print(f"{GREEN}DONE{ENDC}")
+print(f"Total accounts loaded: {GREEN}{len(accounts)}{ENDC}")
 
-print("Connect to Web3 provider...", end="")
+print("Connect to Web3 Ethereum provider... ", end="")
 w3 = Web3(Web3.HTTPProvider(WEB3_ENDPOINT))
-print("DONE")
+print(f"{GREEN}DONE{ENDC}")
 
-current_block = w3.eth.block_number
-if (current_block < BLOCK_HEIGHT + CONFIRMATIONS):
-    print(f"Not enough blocks. Mined {current_block} of {BLOCK_HEIGHT + CONFIRMATIONS}")
-    print(f"Need to wait {BLOCK_HEIGHT + CONFIRMATIONS - current_block} blocks")
-    exit(1)
+print(f"Target block: {GREEN}{BLOCK_HEIGHT}{ENDC} ")
+print(f"Confirmations: {GREEN}{CONFIRMATIONS}{ENDC} ")
+print("")
 
-block_hash = w3.eth.get_block(BLOCK_HEIGHT).hash
-print(f"Hash of block {BLOCK_HEIGHT} is {block_hash.hex()}")
-print(f"See on Etherscan https://etherscan.io/block/{BLOCK_HEIGHT}")
+block_hash = None
+spinner = Spinner()
+while True:
+    current_block = w3.eth.block_number
+    got_confirmations = current_block - BLOCK_HEIGHT
+    if current_block < BLOCK_HEIGHT:
+        spinner.message = f"Waiting for target block. {current_block} of {BLOCK_HEIGHT} "
+        spinner.update()
+        for i in range(10):
+            time.sleep(0.1)
+            spinner.next()
+        continue
+    if block_hash is None:
+        spinner.clearln()
+        print(f'Target block {current_block} mined!')
+        block_hash = w3.eth.get_block(BLOCK_HEIGHT).hash
+        print(f"Hash of the block {BLOCK_HEIGHT} is {GREEN}{block_hash.hex()}{ENDC}")
+        print(f"See it on Etherscan https://etherscan.io/block/{BLOCK_HEIGHT}")
+    if got_confirmations <= CONFIRMATIONS:
+        spinner.message = f'Waiting confirmations {got_confirmations} of {CONFIRMATIONS} '
+        spinner.update()
+        spinner.next()
+        for i in range(10):
+            time.sleep(0.1)
+            spinner.next()
+        continue
+    spinner.clearln()
+    print(f'Target block {current_block} confirmed!')
+    break
 
 winner = get_winner_by_block_hash(accounts, block_hash)
-print(f"The winner is: {winner}")
+print("")
+print(f"The winner is: {BOLD}{GREEN}{winner}{ENDC}")
+print("")
