@@ -1,0 +1,17 @@
+legend$ ./lottery.py 
+
+Load accounts from accounts.txt... DONE
+Sanity checks... DONE
+Total accounts loaded: 13208
+Connect to Web3 Ethereum provider... DONE
+Target block: 12362727 
+Confirmations: 3 
+
+Target block 12362727 mined!
+Hash of the block 12362727 is 0x7c34217a7b9bd20910375b9d36dcfb6fa082bab59a4fb8d7bcb6f469e3a7b4d9
+See it on Etherscan https://etherscan.io/block/12362727
+Target block 12362731 confirmed!
+
+The winner is: 0x58aaEf291ccE6D326D43952b3b7173aEadAab37e
+
+legend$
