@@ -10,10 +10,15 @@ It uses the “Mersenne Twister” deterministic 623-dimensionally equidistribut
 
 * Block: **[12362727](https://etherscan.io/block/countdown/12362727)** on Ethereum Mainnet #1
 * Estimated Target Date: **Mon May 03 2021 17:58:29 GMT**
-* Candidate accounts: **accountlist.json**
 
-Accounts collected through the form were checked to comply ethereum account format (42-digit hex string starting with '0x'). Duplicates were removed and items sorted alphabetically. See [refine_eth_accounts.py](refine_eth_accounts.py) script.
+Accounts collected through the form were checked to comply ethereum account format (42-digit hex string starting with '0x').
+Duplicates were removed and items sorted alphabetically. See [refine_eth_accounts.py](refine_eth_accounts.py) script for details.
 
-## Howto
+* Refined accounts list: **[accounts.txt](accounts.txt)**
+* Participants total: **13208**
+
+
+
+## How to verify
 
 * Just run the lottery.py after the target block got mined
