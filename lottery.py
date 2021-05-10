@@ -22,9 +22,8 @@ ACCOUNTS_FILE = "accounts.txt"
 
 # PROVIDE YOUR INFURA API KEY or URL of your own node endpoint
 WEB3_ENDPOINT = "https://mainnet.infura.io/v3/"
-
-BLOCK_HEIGHT = 12362727
-CONFIRMATIONS = 3
+BLOCK_HEIGHT = 12408686
+CONFIRMATIONS = 2
 
 
 def get_winner_by_block_hash(candidates, block_hash):

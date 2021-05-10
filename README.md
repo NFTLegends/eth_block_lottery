@@ -23,6 +23,13 @@ Duplicates were removed and items sorted alphabetically. See [refine_eth_account
 
 ![Screencast](round_000.gif)
 
+### Round 1
+
+* Block: **[12408686](https://etherscan.io/block/countdown/12408686)**
+* Estimated Target Date: **Mon May 10 2021 19:55 GMT**
+* Refined accounts list: **[accounts.txt](accounts.txt)**
+* Participants total: **13560**
+
 ## How to verify
 
 Just run the [lottery.py](lottery.py) after the target block got mined + 3 confirmations passed.
