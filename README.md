@@ -29,6 +29,8 @@ Duplicates were removed and items sorted alphabetically. See [refine_eth_account
 * Estimated Target Date: **Mon May 10 2021 19:55 GMT**
 * Refined accounts list: **[accounts.txt](accounts.txt)**
 * Participants total: **13560**
+* Round log [round_001.log](round_001.log)
+* Winner: `0x68360a6306cA82B769898034c83c41c09ab0e689`
 
 ## How to verify
 

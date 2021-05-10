@@ -1,0 +1,16 @@
+nftlegends$ ./lottery.py 
+
+Load accounts from accounts.txt... DONE
+Sanity checks... DONE
+Total accounts loaded: 13560
+Connect to Web3 Ethereum provider... DONE
+Target block: 12408686 
+Confirmations: 2 
+
+Target block 12408686 mined!
+Hash of the block 12408686 is 0xd4f606d686c91e86c9466a5dd1a8f8fef8e5083044fcc944e286b986a2698c87
+See it on Etherscan https://etherscan.io/block/12408686
+Target block 12408689 confirmed!
+
+The winner is: 0x68360a6306cA82B769898034c83c41c09ab0e689
+
